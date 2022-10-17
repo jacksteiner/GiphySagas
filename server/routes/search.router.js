@@ -14,7 +14,7 @@ router.get('/:string', (req, res) => {
              res.send(response.data);
          })
          .catch((e) => {
-             console.log(e);
+             console.log('error in search.router GET',e);
              res.sendStatus(500);
          });
 });

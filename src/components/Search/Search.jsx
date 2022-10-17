@@ -28,6 +28,23 @@ const Search = () => {
         findGifs();   
     }, []);
 
+    const favGif = (url) => {
+        console.log('The favorited url is:', url);
+        axios({
+            method: 'POST',
+            url: '/api/favorite',
+            data: {
+                gifUrl: url,
+            }
+        }).then(response => {
+            console.log('Adding new gif to favorites', url);
+        })
+    }
+
+    // const favGif = (e) => {
+    //     axios.post('/api/favorite', {gif: gif.url})
+    // }
+
 
 
     return(
@@ -38,7 +55,13 @@ const Search = () => {
     <button onClick={findGifs}>Submit</button>
     {
         results.map (searchResult => {
-            return <img src={searchResult.images.downsized_medium.url}/>
+           
+            return(
+            <div>
+             <img src={searchResult.images.downsized_medium.url}/>
+            <br></br>
+            <button onClick={() => favGif(searchResult.images.downsized_medium.url)}>Favorite</button>
+            </div>)
         })
     }
     
